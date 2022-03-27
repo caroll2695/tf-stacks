@@ -1,0 +1,12 @@
+# macos files
+.DS_Store
+
+# terraform files
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.lock.hcl
+
+# other files
+*.pem
+consul_config
