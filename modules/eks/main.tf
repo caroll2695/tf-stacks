@@ -24,21 +24,22 @@ module "eks" {
   depends_on = [aws_iam_role.control-plane]
 }
 
-resource "aws_eks_node_group" "general" {
-  node_group_name = "general"
+resource "aws_eks_node_group" "devops" {
+  node_group_name = "devops"
   cluster_name    = var.project
   node_role_arn   = aws_iam_role.nodes.arn
 
+  ami_type = "AL2_x86_64_GPU"
   capacity_type  = "ON_DEMAND"
-  instance_types = ["t3.medium"]
+  instance_types = ["g4dn.2xlarge"]
   disk_size      = 150
 
   subnet_ids = var.private_subnets
 
   scaling_config {
-    desired_size = 2
-    max_size     = 2
-    min_size     = 1
+    desired_size = 0
+    max_size     = 1
+    min_size     = 0
   }
 
   remote_access {
